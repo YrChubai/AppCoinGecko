@@ -1,4 +1,4 @@
-# App ByBit
+# App CoinGecko
 
 ## Описание
 Android-Приложение написанное на Kotlin, которое обращается к API CoinGecko и показывает список криптовалют
