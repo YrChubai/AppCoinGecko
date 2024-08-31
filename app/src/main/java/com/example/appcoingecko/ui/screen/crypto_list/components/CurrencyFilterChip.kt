@@ -38,7 +38,7 @@ fun CurrencyFilterChip(
             }
         },
         modifier = Modifier
-            .padding(horizontal = 10.dp)
+            .padding(end = 10.dp)
             .height(35.dp),
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = SecondOrange.copy(alpha = 0.12f),
