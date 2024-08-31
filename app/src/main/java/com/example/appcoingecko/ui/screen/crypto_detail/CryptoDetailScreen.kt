@@ -2,6 +2,7 @@ package com.example.appcoingecko.ui.screen.crypto_detail
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,79 +49,86 @@ fun MyTopAppBar(title: String, onBackClicked: () -> Unit) {
 @Composable
 fun CryptoDetailScreen(
     id: String,
+    name: String,
     navController: NavController,
     viewModel: CryptoDetailViewModel = viewModel()
 ){
     LaunchedEffect(id) {
         viewModel.loadItems(id)
     }
-        val state = viewModel.state.value
+    val state = viewModel.state.value
 
-        Scaffold(
-            topBar = { Surface(shadowElevation = 4.dp){
-                MyTopAppBar(title = id, onBackClicked = { navController.navigate("crypto_list")} )
-                }
-            },
-        ) { paddingValues  ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(paddingValues),
+    Scaffold(
+        topBar = { Surface(shadowElevation = 4.dp){
+            MyTopAppBar(title = name, onBackClicked = { navController.navigate("crypto_list")} )
+            }
+        },
+    ) { paddingValues  ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(paddingValues),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
-                        verticalArrangement = Arrangement.spacedBy(10.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        state.coin?.let {
-                        AsyncImage(
-                            model = it.image,
-                            contentDescription = "",
-                        )
-                        Text(
-                            text = "Описание",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color.Black,
-                            textAlign = TextAlign.Start,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        Text(
-                            text = it.description,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color.Black,
-                            textAlign = TextAlign.Start,
-                        )
-                        val listCategory = it.categories.joinToString(separator = ", ")
-                        Text(
-                            text = "Категории",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Start,
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                        Text(
-                            text = listCategory,
-                            style = MaterialTheme.typography.titleLarge,
-                            color = Color.Black,
-                            textAlign = TextAlign.Start,
-                        )
-                    }
-                }
-                if(state.isLoading) {
-                    CircularLoader()
-                }
-                if(state.error.isNotBlank()) {
-                    Log.d("Error", state.error)
-                    ErrorRefresher {
-                        viewModel.loadItems(id)
-                    }
+                    state.coin?.let {
+                    AsyncImage(
+                        model = it.image,
+                        contentDescription = "",
+                    )
+                    Text(
+                        text = "Описание",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Text(
+                        text = it.description,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start,
+                    )
+                    val listCategory = it.categories.joinToString(separator = ", ")
+                    Text(
+                        text = "Категории",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Text(
+                        text = listCategory,
+                        style = MaterialTheme.typography.titleLarge,
+                        color = Color.Black,
+                        textAlign = TextAlign.Start,
+                    )
                 }
             }
         }
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            if (state.isLoading) {
+                CircularLoader()
+            }
+
+            if (state.error.isNotBlank()) {
+                Log.d("Error", state.error)
+                ErrorRefresher(
+                    onRetry = { viewModel.loadItems(id) }
+                )
+            }
+        }
     }
+}
 
 

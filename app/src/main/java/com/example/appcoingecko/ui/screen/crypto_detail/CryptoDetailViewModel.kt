@@ -1,6 +1,5 @@
 package com.example.appcoingecko.ui.screen.crypto_detail
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -28,13 +27,11 @@ class CryptoDetailViewModel : ViewModel(){
                 val result = formateRespone(call)
 
                 _state.value = CryptoDetailState(coin = result)
-                Log.d("Loadeddetail", _state.value.toString())
 
             } catch (e: Exception){
                 _state.value = CryptoDetailState(
                     error = e.message ?: "An unexpected error occured"
                 )
-                Log.d("ERRORdetail", e.toString())
             }
         }
     }

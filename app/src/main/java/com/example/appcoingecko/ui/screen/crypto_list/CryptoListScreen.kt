@@ -86,7 +86,7 @@ fun CryptoListScreen(navController: NavController, viewModel: CryptoListViewMode
             PullToRefreshBox(
                 isRefreshing = viewModel.isRefreshing,
                 onRefresh = {
-                        viewModel.refreshItems("sdasdasd")
+                        viewModel.refreshItems(selectedChip.name)
                 },
                 modifier = Modifier.padding(paddingValues)
             ){
@@ -98,7 +98,7 @@ fun CryptoListScreen(navController: NavController, viewModel: CryptoListViewMode
                         state.coins
                     ) { _, item ->
                         CryptoListItem(item, onItemClick = {
-                            navController.navigate("crypto_detail/${item.id}")
+                            navController.navigate("crypto_detail/${item.id}/${item.name}")
                         })
                     }
                 }

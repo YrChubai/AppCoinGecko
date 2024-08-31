@@ -30,9 +30,10 @@ fun MainApp() {
         composable("crypto_list") {
             CryptoListScreen(navController)
         }
-        composable("crypto_detail/{coinId}") { backStackEntry ->
+        composable("crypto_detail/{coinId}/{coinName}") { backStackEntry ->
             val itemId = backStackEntry.arguments?.getString("coinId") ?: "tron"
-            CryptoDetailScreen(itemId, navController)
+            val itemName = backStackEntry.arguments?.getString("coinName") ?: "TRX"
+            CryptoDetailScreen(itemId, itemName, navController)
         }
     }
 

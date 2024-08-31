@@ -39,7 +39,7 @@ fun CryptoListItem(
         ) {
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(45.dp)
             ){
                 AsyncImage(
                     model = coin.image,
