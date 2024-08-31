@@ -1,4 +1,4 @@
-package com.example.traineapp.ui.screen.crypto_detail
+package com.example.appcoingecko.ui.screen.crypto_detail
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -29,7 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.traineapp.ui.screen.crypto_list.LoadedScreen
+import com.example.appcoingecko.ui.screen.componets.CircularLoader
+import com.example.appcoingecko.ui.screen.componets.ErrorRefresher
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +55,7 @@ fun CryptoDetailScreen(
         Log.d("LoadedIdScreen","Loading item with id: $id")
         viewModel.loadItems(id)
     }
-    val state = viewModel.state.value
+        val state = viewModel.state.value
 
         Scaffold(
             topBar = { Surface(shadowElevation = 4.dp){
@@ -111,11 +112,13 @@ fun CryptoDetailScreen(
                     }
                 }
                 if(state.isLoading) {
-                    LoadedScreen()
+                    CircularLoader()
                 }
                 if(state.error.isNotBlank()) {
                     Log.d("Error", state.error)
-                    //ErrorScreen()
+                    ErrorRefresher {
+                        viewModel.loadItems(id)
+                    }
                 }
             }
         }

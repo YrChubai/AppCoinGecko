@@ -1,6 +1,6 @@
-package com.example.traineapp.ui.screen.crypto_list
+package com.example.appcoingecko.ui.screen.crypto_list
 
-import com.example.traineapp.data.model.CoinCryptoModif
+import com.example.appcoingecko.data.model.CoinCryptoModif
 
 data class CryptoListState(
     val isLoading: Boolean = false,

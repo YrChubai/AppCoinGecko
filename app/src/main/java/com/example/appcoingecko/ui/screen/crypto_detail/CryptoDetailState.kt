@@ -1,6 +1,6 @@
-package com.example.traineapp.ui.screen.crypto_detail
+package com.example.appcoingecko.ui.screen.crypto_detail
 
-import com.example.traineapp.data.model.CoinCryptoDetailModif
+import com.example.appcoingecko.data.model.CoinCryptoDetailModif
 
 data class CryptoDetailState(
     val isLoading: Boolean = false,

@@ -1,4 +1,4 @@
-package com.example.traineapp.ui.screen.crypto_list.components
+package com.example.appcoingecko.ui.screen.crypto_list.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,13 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.traineapp.data.model.CoinCryptoModif
-import com.example.traineapp.ui.screen.crypto_list.CryptoListViewModel
+import com.example.appcoingecko.data.model.CoinCryptoModif
+import com.example.appcoingecko.ui.screen.crypto_list.CryptoListViewModel
 
 
 @Composable
 fun CryptoListItem(
-
     coin: CoinCryptoModif,
     onItemClick: (CoinCryptoModif) -> Unit = {},
     viewModel: CryptoListViewModel = viewModel()

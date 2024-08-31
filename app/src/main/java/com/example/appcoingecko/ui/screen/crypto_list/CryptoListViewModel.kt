@@ -1,4 +1,4 @@
-package com.example.traineapp.ui.screen.crypto_list
+package com.example.appcoingecko.ui.screen.crypto_list
 
 
 import androidx.compose.runtime.State
@@ -11,9 +11,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.appcoingecko.data.repository.CryptoRepository
 import com.example.appcoingecko.ui.theme.GreenStock
 import com.example.appcoingecko.ui.theme.RedStock
-import com.example.traineapp.data.model.CoinCrypto
-import com.example.traineapp.data.model.CoinCryptoModif
-import com.example.traineapp.data.remote.AdapterApi
+import com.example.appcoingecko.data.model.CoinCrypto
+import com.example.appcoingecko.data.model.CoinCryptoModif
+import com.example.appcoingecko.data.remote.AdapterApi
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
@@ -26,8 +26,6 @@ class CryptoListViewModel : ViewModel() {
     val state: State<CryptoListState> = _state
 
     var isRefreshing by mutableStateOf(false)
-
-    var liveDataList = mutableStateOf<List<CoinCryptoModif>>(listOf())
 
     enum class CurrencyOption { usd, rub }
 
@@ -69,7 +67,7 @@ class CryptoListViewModel : ViewModel() {
     }
 
     fun formateRespone(responsetItem: List<CoinCrypto>, currency: String): List<CoinCryptoModif> {
-        val announcementsModif =
+        val coinModif =
             responsetItem.mapIndexed { _, item ->
                 CoinCryptoModif(
                     item.id,
@@ -80,14 +78,12 @@ class CryptoListViewModel : ViewModel() {
                     formatePriceChange(item.price_change_percentage_24h)
                 )
             }
-//        liveDataList.value = announcementsModif
-        return announcementsModif
+        return coinModif
     }
 
     fun formatePrice(price: Double, currency: String): String {
         val roundedString = String.format("%,.2f", price)
-        val textFormated = if (currency == "usd") "$ ${roundedString}" else "₽ ${roundedString}"
-        return textFormated
+        return if (currency == "usd") "$ $roundedString" else "₽ $roundedString"
     }
 
     fun formatePriceChange(priceChange: Double): String {

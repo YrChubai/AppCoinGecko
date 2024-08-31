@@ -1,6 +1,4 @@
-package com.example.traineapp.data.model
-
-
+package com.example.appcoingecko.data.model
 
 data class CoinCryptoDetail(
     val id: String,

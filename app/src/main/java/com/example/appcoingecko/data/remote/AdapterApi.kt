@@ -1,4 +1,4 @@
-package com.example.traineapp.data.remote
+package com.example.appcoingecko.data.remote
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

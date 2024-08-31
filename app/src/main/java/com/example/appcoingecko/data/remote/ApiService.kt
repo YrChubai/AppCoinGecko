@@ -1,7 +1,7 @@
-package com.example.traineapp.data.remote
+package com.example.appcoingecko.data.remote
 
-import com.example.traineapp.data.model.CoinCrypto
-import com.example.traineapp.data.model.CoinCryptoDetail
+import com.example.appcoingecko.data.model.CoinCrypto
+import com.example.appcoingecko.data.model.CoinCryptoDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
