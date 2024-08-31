@@ -52,7 +52,6 @@ fun CryptoDetailScreen(
     viewModel: CryptoDetailViewModel = viewModel()
 ){
     LaunchedEffect(id) {
-        Log.d("LoadedIdScreen","Loading item with id: $id")
         viewModel.loadItems(id)
     }
         val state = viewModel.state.value

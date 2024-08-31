@@ -8,12 +8,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appcoingecko.data.repository.CryptoRepository
-import com.example.appcoingecko.ui.theme.GreenStock
-import com.example.appcoingecko.ui.theme.RedStock
 import com.example.appcoingecko.data.model.CoinCrypto
 import com.example.appcoingecko.data.model.CoinCryptoModif
 import com.example.appcoingecko.data.remote.AdapterApi
+import com.example.appcoingecko.data.repository.CryptoRepository
+import com.example.appcoingecko.ui.theme.GreenStock
+import com.example.appcoingecko.ui.theme.RedStock
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
@@ -36,11 +36,32 @@ class CryptoListViewModel : ViewModel() {
     }
 
 
-    fun loadItems(currency: String, refresh: Boolean = false) {
+    fun loadItems(currency: String) {
         viewModelScope.launch {
             try {
-                if (refresh){isRefreshing = true}
                 _state.value = CryptoListState(isLoading = true)
+
+                val call = repository.fetchItems(currency)
+                val result = formateRespone(call, currency)
+
+                _state.value = CryptoListState(coins = result)
+            } catch (e: Exception) {
+                _state.value = CryptoListState(
+                    error = e.message ?: "An unexpected error occured"
+                )
+            }
+
+        }
+    }
+
+    fun refreshItems(currency: String) {
+        viewModelScope.launch {
+            try {
+                isRefreshing = true
+
+                _state.value = _state.value.copy(
+                    errorRefresh = ""
+                )
 
                 val call = repository.fetchItems(currency)
                 val result = formateRespone(call, currency)
@@ -48,21 +69,12 @@ class CryptoListViewModel : ViewModel() {
                 _state.value = CryptoListState(coins = result)
 
             } catch (e: Exception) {
-                _state.value = CryptoListState(
-                    error = e.message ?: "An unexpected error occured"
+                _state.value = _state.value.copy(
+                    errorRefresh = e.message ?: "An unexpected error occurred"
                 )
+            } finally {
+                isRefreshing = false
             }
-            finally {
-                if (refresh){
-                isRefreshing = false}
-            }
-        }
-    }
-
-    fun refreshItems(currency: String) {
-        try {
-            loadItems(currency, true)
-        } catch (e: Exception) {
         }
     }
 
