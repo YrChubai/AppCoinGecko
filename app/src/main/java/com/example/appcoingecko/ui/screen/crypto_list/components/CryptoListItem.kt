@@ -12,12 +12,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.appcoingecko.data.model.CoinCryptoModif
 import com.example.appcoingecko.ui.screen.crypto_list.CryptoListViewModel
+import com.example.appcoingecko.ui.theme.CryptoGraySup
 
 
 @Composable
@@ -51,10 +54,13 @@ fun CryptoListItem(
             ){
                 Text(
                     text = coin.name,
+                    fontWeight = FontWeight.Medium,
+                    color = CryptoGraySup,
+                    fontSize = 16.sp
                 )
 
                 Text(
-                    text = coin.symbol, fontSize = 12.sp
+                    text = coin.symbol, fontSize = 14.sp, color =  Color.Gray
                 )
             }
         }
@@ -68,7 +74,7 @@ fun CryptoListItem(
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = coin.current_price,
+                    text = coin.current_price, fontWeight = FontWeight.Bold, color = CryptoGraySup
                 )
                 Text(
                     text = coin.price_change_percentage_24h,

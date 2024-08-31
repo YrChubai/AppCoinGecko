@@ -11,7 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -26,7 +25,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.appcoingecko.ui.screen.componets.CircularLoader
@@ -73,10 +74,11 @@ fun CryptoListScreen(navController: NavController, viewModel: CryptoListViewMode
                 ) {
                     Text(
                         text = "Список криптовалют",
-                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Medium,
                         color = Color.Black,
+                        fontSize = 20.sp
                     )
-                    Row (modifier = Modifier.padding(top = 16.dp)){
+                    Row (modifier = Modifier.padding(top = 24.dp)){
                         ChipsCurrency()
                     }
                 }
