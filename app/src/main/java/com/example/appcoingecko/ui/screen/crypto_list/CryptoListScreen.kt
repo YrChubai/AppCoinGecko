@@ -39,7 +39,10 @@ import com.example.appcoingecko.ui.theme.RedStock
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CryptoListScreen(navController: NavController, viewModel: CryptoListViewModel = viewModel()) {
+fun CryptoListScreen(
+    navController: NavController,
+    viewModel: CryptoListViewModel = viewModel()
+) {
 
     val selectedChip by remember { viewModel.liveChipsSelected }
     val state = viewModel.state.value

@@ -36,7 +36,10 @@ import com.example.appcoingecko.ui.screen.componets.ErrorRefresher
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTopAppBar(title: String, onBackClicked: () -> Unit) {
+fun MyTopAppBar(
+    title: String,
+    onBackClicked: () -> Unit,
+) {
     TopAppBar(
         title = { Text(text = title) },
         navigationIcon = {
@@ -60,7 +63,10 @@ fun CryptoDetailScreen(
 
     Scaffold(
         topBar = { Surface(shadowElevation = 4.dp){
-            MyTopAppBar(title = name, onBackClicked = { navController.navigate("crypto_list")} )
+            MyTopAppBar(
+                title = name,
+                onBackClicked = { navController.navigate("crypto_list")},
+                )
             }
         },
     ) { paddingValues  ->
@@ -72,7 +78,11 @@ fun CryptoDetailScreen(
             ) {
                 Column(
                     modifier = Modifier
-                        .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp),
+                        .padding(
+                            start = 16.dp,
+                            top = 8.dp,
+                            end = 16.dp,
+                            bottom = 8.dp,),
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
